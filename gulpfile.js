@@ -5,8 +5,9 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     browserSync = require('browser-sync'),
-    combineMq = require('gulp-combine-mq');
-    notify = require('gulp-notify');
+    combineMq = require('gulp-combine-mq'),
+    notify = require('gulp-notify'),
+	 babel = require('babel');
 
 /*****************************************************
 ・Deliverablesは納品物のフォルダ
@@ -20,8 +21,8 @@ var gulp = require('gulp'),
 *******************************************************/
 //Deliverables Folder
 var deliverables = "html/";
-//Folder to develop 
-var develop = "develop-html/";
+//Folder to develop
+var develop = "";
 //config
 var config = {
    "path" : {
@@ -30,10 +31,12 @@ var config = {
       "afterCompileSass" : develop+"css/",
       "ejsDir"    : develop+"ejs/**/*.ejs",
       "templateDir": develop+"ejs/templates/_*.ejs",
-      "afterCompileEjs": develop
+      "afterCompileEjs": develop,
+		"es6": develop+"es6/*.js",
+		"js": develop+"js/*.js"
    }
 },
-//Folder to release 
+//Folder to release
 release = {
   "path" : {
     "css": deliverables+"css/",
@@ -47,8 +50,9 @@ gulp.task('default',function(){
   //監視
   gulp.watch([config.path.ejsDir,config.path.templateDir],['EJS']);
   gulp.watch([config.path.sassCompile],['SASS']);
+  gulp.watch([config.path.es6],['BABEL']);
   gulp.watch([develop+'*.html',develop+'js/*.js'],['RELOAD']);
-  
+
   //サーバー起動
   browserSync({
       server:{
@@ -81,7 +85,17 @@ gulp.task('default',function(){
     .pipe(browserSync.stream());
   });
 
-    
+  //es6のコンパイル
+  gulp.task('babel',function(){
+	  gulp.src(config.path.es6)
+	  	.pipe(plumber({
+			errorHandler: notify.onError('Error: <%= error.message %>')
+		}))
+		.pipe(babel())
+		.pipe(gulp.dest(config.path.js))
+  });
+
+
 
   //ブラウザの自動リロード
   gulp.task('RELOAD',function(){
