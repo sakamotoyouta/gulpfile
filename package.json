@@ -1,0 +1,22 @@
+{
+  "name": "base",
+  "version": "0.0.0",
+  "description": "gulp base file in grooweb",
+  "main": "gulpfile.js",
+  "author": "grooweb",
+  "license": "MIT",
+  "scripts": {
+    "start": "gulp",
+    "release": "gulp build"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.12.12",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-combine-mq": "^0.4.0",
+    "gulp-ejs": "^2.1.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.1"
+  }
+}
