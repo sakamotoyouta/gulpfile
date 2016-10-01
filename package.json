@@ -1,9 +1,9 @@
 {
   "name": "base",
   "version": "0.0.0",
-  "description": "gulp base file in grooweb",
+  "description": "gulp base file by sakamoto",
   "main": "gulpfile.js",
-  "author": "grooweb",
+  "author": "sakamoto",
   "license": "MIT",
   "scripts": {
     "start": "gulp",
