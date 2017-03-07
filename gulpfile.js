@@ -92,7 +92,7 @@ gulp.task('default',function(){
 			errorHandler: notify.onError('Error: <%= error.message %>')
 		}))
 		.pipe(babel())
-		.pipe(gulp.dest(config.path.js))
+		.pipe(gulp.dest(config.path.js));
   });
 
 
@@ -100,7 +100,7 @@ gulp.task('default',function(){
   //ブラウザの自動リロード
   gulp.task('RELOAD',function(){
     browserSync.reload();
-  })
+ });
 
 });
 
